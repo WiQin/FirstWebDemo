@@ -2,7 +2,7 @@ package wyw.impl;
 
 import wyw.dao.StudentsDao;
 import wyw.entity.Students;
-import wyw.util.DBConn;
+import wyw.util.DbConn;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ import java.util.List;
  * @Author Wangyw
  */
 public class StudentsImpl implements StudentsDao {
-    private DBConn dbConn;
+    private DbConn dbConn;
     private Connection connection = null;
     private PreparedStatement statement = null;
 
@@ -25,7 +25,7 @@ public class StudentsImpl implements StudentsDao {
         super();
     }
 
-    public StudentsImpl(DBConn dbConn) {
+    public StudentsImpl(DbConn dbConn) {
         this.dbConn = dbConn;
     }
 
@@ -36,7 +36,7 @@ public class StudentsImpl implements StudentsDao {
 
         try {
             connection = dbConn.getConnection();
-            String sql = "select username,password,usergrade from wyw_user where username = '"+ name +"'";
+            String sql = "select username,password from wyw_students where username = '"+ name +"'";
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
@@ -62,8 +62,8 @@ public class StudentsImpl implements StudentsDao {
 
             boolean login = login(students.getName(), students.getPwd());
 
-            if (login = false) {
-                statement = connection.prepareStatement("insert into wyw_user (username,password) values (?,?)");
+            if (login == false) {
+                statement = connection.prepareStatement("insert into wyw_students (username,password) values (?,?)");
                 statement.setString(1, students.getName());
                 statement.setString(2, students.getPwd());
                 statement.executeUpdate();
@@ -79,7 +79,7 @@ public class StudentsImpl implements StudentsDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            dbConn.Close(connection, statement, null);
+            dbConn.close(connection,statement,null);
         }
         return flag;
     }
@@ -96,7 +96,7 @@ public class StudentsImpl implements StudentsDao {
     }
 
     @Override
-    public boolean update(int id, String name, String pwd, String sex, String eamil, String dob) {
+    public boolean update(int id, String name, String pwd, String sex, String eamil) {
         return false;
     }
 }

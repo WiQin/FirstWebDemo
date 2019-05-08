@@ -2,6 +2,7 @@ package wyw.servlet;
 
 import wyw.dao.StudentsDao;
 import wyw.impl.StudentsImpl;
+import wyw.util.DbConn;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("name");
         String pwd = request.getParameter("pwd");
 
-        StudentsDao students = new StudentsImpl();
+        StudentsDao students = new StudentsImpl(DbConn.getInstance());
         if(students.login(name,pwd)){
             request.setAttribute("xiaoxi","欢迎您："+name);
             request.getRequestDispatcher("/success.jsp").forward(request,response);

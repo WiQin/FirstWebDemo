@@ -3,6 +3,7 @@ package wyw.servlet;
 import wyw.dao.StudentsDao;
 import wyw.entity.Students;
 import wyw.impl.StudentsImpl;
+import wyw.util.DbConn;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,12 +31,15 @@ public class RegisterServlet extends HttpServlet {
         students.setSex(sex);
         students.setEamil(email);
 
-        StudentsDao studentsDao = new StudentsImpl();
+        StudentsDao studentsDao = new StudentsImpl(DbConn.getInstance());
 
         if(studentsDao.register(students)){
 
             request.setAttribute("name", name);  //向request域中放置参数
-            //request.setAttribute("xiaoxi", "注册成功");
+            request.setAttribute("pwd", pwd);  //向request域中放置参数
+            request.setAttribute("sex", sex);  //向request域中放置参数
+            request.setAttribute("email", email);  //向request域中放置参数
+            /*request.setAttribute("xiaoxi", "注册成功");*/
             request.getRequestDispatcher("/login.jsp").forward(request, response);  //转发到登录页面
 
         }else{
