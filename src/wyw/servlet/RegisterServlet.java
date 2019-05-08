@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
+
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
 
         if(studentsDao.register(students)){
 
-            request.setAttribute("username", name);  //向request域中放置参数
+            request.setAttribute("name", name);  //向request域中放置参数
             //request.setAttribute("xiaoxi", "注册成功");
             request.getRequestDispatcher("/login.jsp").forward(request, response);  //转发到登录页面
 
