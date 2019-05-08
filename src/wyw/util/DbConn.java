@@ -1,20 +1,18 @@
 package wyw.util;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.Properties;
 
 /**
- * @ClassName DBConn
- * @Description  数据库连接
+ * @ClassName DbConn
+ * @Description
  * @Author Wangyw
  */
-public class DBConn {
+public class DbConn {
+    private Connection connection = null;//企业级开发中，connection不要用static修饰，在哪用就在哪初始化
 
-    private Connection conn = null;
-
-    private static DBConn instance = null;
+    private static DbConn instance = null;
 
     private String driver = "";
     private String url = "";
@@ -24,52 +22,55 @@ public class DBConn {
     private static FileInputStream fis = null;
     private static Properties properties = null;
 
-    public static DBConn getInstacne(){
+    public static DbConn getInstance(){
         if(instance == null){
-            instance = new DBConn();
+            instance = new DbConn();
         }
         return instance;
     }
 
-    //连接数据库
-    private DBConn(){
+    //只连接一次，放入构造器中,单例模式
+    private DbConn(){
         try {
+
             properties = new Properties();
-            fis = new FileInputStream("DbInfo.properties");
-            properties.load(fis);
+            /*fis = new FileInputStream("DbInfo.properties");
+            properties.load(fis);*/
+            properties.load(DbConn.class.getResourceAsStream("/DbInfo.properties"));
 
             driver = properties.getProperty("driver");
             url = properties.getProperty("url");
             userName = properties.getProperty("userName");
             passWord = properties.getProperty("passWord");
 
+            //加载驱动
             Class.forName(driver);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Connection getConnection(){
+
+    public Connection getConnection() {
         try {
-            conn = DriverManager.getConnection(url,userName,passWord);
+            connection = DriverManager.getConnection(url, userName, passWord);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return conn;
+        return connection;
     }
 
-    public void Close(Connection conn, Statement statement, ResultSet resuleSet){
-        if(conn != null){
+    public void close(Connection connection, Statement statement, ResultSet resultSet) {
+        if (connection != null) {//connection:晚开早关
             try {
-                conn.close();
-                conn = null;
+                connection.close();
+                connection = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
 
-        if(statement != null){
+        if (statement != null) {
             try {
                 statement.close();
                 statement = null;
@@ -78,14 +79,13 @@ public class DBConn {
             }
         }
 
-        if(resuleSet != null){
+        if (resultSet != null) {
             try {
-                resuleSet.close();
-                resuleSet = null;
+                resultSet.close();
+                resultSet = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
