@@ -11,6 +11,6 @@
 </head>
 <body>
 ${xiaoxi} <br>
-<a href="Searchall">查看所有用户</a>
+<a href="CheckServlet">查看所有用户</a>
 </body>
 </html>

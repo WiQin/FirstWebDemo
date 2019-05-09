@@ -20,10 +20,13 @@ public class StudentsImpl implements StudentsDao {
     private DbConn dbConn;
     private Connection connection = null;
     private PreparedStatement statement = null;
+    private ResultSet resultSet  = null;
 
-    public StudentsImpl() {
+    /*public StudentsImpl() {
         super();
     }
+    注释掉，以免servlet中新建对象忘记加参数
+    */
 
     public StudentsImpl(DbConn dbConn) {
         this.dbConn = dbConn;
@@ -87,16 +90,80 @@ public class StudentsImpl implements StudentsDao {
     @Override
     public List<Students> getAllStudents() {
         List<Students> list = new ArrayList<Students>();
+
+        try {
+            connection = dbConn.getConnection();
+            String sql = "select * from wyw_students";
+            statement = connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                Students stu = new Students();
+                stu.setId(resultSet.getInt("id"));
+                stu.setName(resultSet.getString("username"));
+                stu.setPwd(resultSet.getString("password"));
+                stu.setSex(resultSet.getString("sex"));
+                stu.setEmail(resultSet.getString("email"));
+                list.add(stu);
+
+            }
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConn.close(connection,statement,resultSet);
+        }
         return list;
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        boolean flag = false;
+
+        try {
+            connection = dbConn.getConnection();
+
+            statement = connection.prepareStatement("delete from wyw_students where id="+id);
+            statement.executeUpdate();
+            connection.commit();
+
+            flag = true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConn.close(connection,statement,null);
+        }
+        return flag;
     }
 
+
     @Override
-    public boolean update(int id, String name, String pwd, String sex, String eamil) {
-        return false;
+    public boolean update(int id, String name, String pwd, String sex, String email) {
+        boolean flag = false;
+
+        try {
+            connection = dbConn.getConnection();
+
+                statement = connection.prepareStatement("update wyw_students set username ='"+name
+                        +"' , password ='"+pwd
+                        +"' , sex ='"+sex
+                        +"' , email ='"+email
+                        +"' where id = "+id);
+
+                statement.executeUpdate();
+                connection.commit();
+
+                flag = true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConn.close(connection,statement,null);
+        }
+        return flag;
     }
 }

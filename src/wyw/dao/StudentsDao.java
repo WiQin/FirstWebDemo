@@ -9,6 +9,6 @@ public interface StudentsDao {
     public boolean register(Students students);
     public List<Students> getAllStudents();
     public boolean delete(int id);
-    public boolean update(int id,String name,String pwd,String sex,String eamil);
+    public boolean update(int id,String name,String pwd,String sex,String email);
 
 }

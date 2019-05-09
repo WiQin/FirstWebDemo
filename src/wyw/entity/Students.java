@@ -1,7 +1,5 @@
 package wyw.entity;
 
-import java.util.Date;
-
 /**
  * @ClassName Students
  * @Description
@@ -12,19 +10,19 @@ public class Students {
     private String name;
     private String pwd;
     private String sex;
-    private String eamil;
+    private String email;
 
 
     public Students() {
         super();
     }
 
-    public Students(int id, String name, String pwd, String sex, String eamil) {
+    public Students(int id, String name, String pwd, String sex, String email) {
         this.id = id;
         this.name = name;
         this.pwd = pwd;
         this.sex = sex;
-        this.eamil = eamil;
+        this.email = email;
 
     }
 
@@ -60,12 +58,12 @@ public class Students {
         this.sex = sex;
     }
 
-    public String getEamil() {
-        return eamil;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEamil(String eamil) {
-        this.eamil = eamil;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
