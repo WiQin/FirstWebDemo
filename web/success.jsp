@@ -7,10 +7,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>My JSP 'success.jsp' starting page</title>
+    <title>登陆成功</title>
 </head>
 <body>
-${xiaoxi} <br>
+${message} <br>
 <a href="CheckServlet">查看所有用户</a>
 </body>
 </html>

@@ -25,7 +25,6 @@ public class StudentsImpl implements StudentsDao {
     /*public StudentsImpl() {
         super();
     }
-    注释掉，以免servlet中新建对象忘记加参数
     */
 
     public StudentsImpl(DbConn dbConn) {
@@ -51,7 +50,6 @@ public class StudentsImpl implements StudentsDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return flag;
     }
 
@@ -107,10 +105,6 @@ public class StudentsImpl implements StudentsDao {
                 list.add(stu);
 
             }
-
-
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -140,25 +134,22 @@ public class StudentsImpl implements StudentsDao {
         return flag;
     }
 
-
     @Override
     public boolean update(int id, String name, String pwd, String sex, String email) {
         boolean flag = false;
 
         try {
             connection = dbConn.getConnection();
-
-                statement = connection.prepareStatement("update wyw_students set username ='"+name
+            statement = connection.prepareStatement("update wyw_students set username ='"+name
                         +"' , password ='"+pwd
                         +"' , sex ='"+sex
                         +"' , email ='"+email
                         +"' where id = "+id);
 
-                statement.executeUpdate();
-                connection.commit();
+            statement.executeUpdate();
+            connection.commit();
 
-                flag = true;
-
+            flag = true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

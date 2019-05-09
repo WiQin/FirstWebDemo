@@ -16,11 +16,11 @@
 <html>
 <head>
     <base href="<%=basePath%>">
-    <title>所有用户页面</title>
+    <title>查看用户</title>
 </head>
 
 <body>
-<h1>${xiaoxi}</h1>
+<h1>${message}</h1>
 <table  width="600" border="1" cellpadding="0" >
     <tr>
         <th>ID</th>

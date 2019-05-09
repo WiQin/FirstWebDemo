@@ -39,7 +39,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("pwd", pwd);  //向request域中放置参数
             request.setAttribute("sex", sex);  //向request域中放置参数
             request.setAttribute("email", email);  //向request域中放置参数
-            request.setAttribute("xiaoxi", "注册成功");
+            request.setAttribute("message", "注册成功");
             request.getRequestDispatcher("/login.jsp").forward(request, response);  //转发到登录页面
 
         }else{

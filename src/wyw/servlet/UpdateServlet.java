@@ -32,7 +32,7 @@ public class UpdateServlet extends HttpServlet {
         StudentsDao stu = new StudentsImpl(DbConn.getInstance());
 
         if(stu.update(userId,name,pwd,sex,email)){
-            request.setAttribute("xiaoxi", "更新成功");
+            request.setAttribute("message", "更新成功");
             request.getRequestDispatcher("/CheckServlet").forward(request, response);
         }else{
             response.sendRedirect("index.jsp");

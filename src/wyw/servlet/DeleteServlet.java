@@ -24,7 +24,7 @@ public class DeleteServlet extends HttpServlet {
         StudentsDao stu = new StudentsImpl(DbConn.getInstance());
 
         if(stu.delete(userId)){
-            request.setAttribute("xiaoxi", "删除成功");
+            request.setAttribute("message", "删除成功");
             request.getRequestDispatcher("/CheckServlet").forward(request, response);
         }else{
             response.sendRedirect("index.jsp");

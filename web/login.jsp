@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>登录注册页面</title>
+    <title>登录注册</title>
 </head>
 <body >
 <form action="LoginServlet"  method="post"  style="padding-top:-700px;">
@@ -11,7 +11,7 @@
     <input type="submit"value="登录"name="login"><input type="reset"value="重置"><br>
 </form>
 <form action="register.jsp">
-    <input type="submit"value="新用户注册">
+    <input type="submit"value="注册">
 </form>
 
 </body>

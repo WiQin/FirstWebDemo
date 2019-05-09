@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
 
         StudentsDao students = new StudentsImpl(DbConn.getInstance());
         if(students.login(name,pwd)){
-            request.setAttribute("xiaoxi","欢迎您："+name);
+            request.setAttribute("meaasge","你好："+name);
             request.getRequestDispatcher("/success.jsp").forward(request,response);
         }else{
             response.sendRedirect("index.jsp");

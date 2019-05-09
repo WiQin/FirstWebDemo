@@ -6,9 +6,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <title>My JSP 'index.jsp' starting page</title>
+  <title>失败</title>
 </head>
 <body>
-<h1>失败111</h1>
+<h1>操作失败，请检查</h1>
 </body>
 </html>
